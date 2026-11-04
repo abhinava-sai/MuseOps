@@ -1,6 +1,6 @@
 ﻿# MuseOps
 
-**An AI-powered operations assistant for small businesses.**
+**An AI-powered operations assistant for small businesses through whatsapp.**
 
 MuseOps is a hackathon prototype exploring how conversational AI can help small businesses manage everyday operations, including supplier communication, inventory context, purchase orders, and invoice verification.
 
