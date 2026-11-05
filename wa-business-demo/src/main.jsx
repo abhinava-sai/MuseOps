@@ -94,16 +94,15 @@ const initialAssistantChat = {
 
 
 
-function Avatar({ chat, size='normal' }) {
-
-  return <div className={`avatar ${chat.color || ''} ${size}`}>
-
-    {chat.type === 'assistant' ? <span className="assistant-glyph">✦</span> : chat.initials}
-
-    {chat.online && <i className="online-dot"/>}
-
-  </div>;
-
+function Avatar({ chat, size = 'normal' }) {
+  return (
+    <div className={`avatar ${chat.color || ''} ${size} ${chat.type === 'assistant' ? 'muse-avatar' : ''}`}>
+      {chat.type === 'assistant'
+        ? <img src="/assets/muse-avatar.png" alt="Muse" />
+        : chat.initials}
+      {chat.online && <i className="online-dot" />}
+    </div>
+  );
 }
 
 function IconButton({title, children, onClick, active=false, className=''}) {
@@ -513,7 +512,9 @@ function App() {
 
         <button type="button" className={`assistant-rail ${activeId==='assistant'?'selected':''}`} title="MuseOps" onClick={openAssistant}>
 
-          <span className="assistant-orbit"><Sparkles size={20}/></span>
+          <span className="assistant-orbit muse-rail-logo">
+                <img src="/assets/muse-avatar.png" alt="Muse" />
+          </span>
 
           <span className="assistant-rail-dot"/>
 
@@ -607,8 +608,7 @@ function App() {
 
           <div className="header-actions">
 
-            <button className="video-action"><Video size={18}/><span>Video</span><ChevronDown size={14}/></button>
-
+            <IconButton title="Voice call"><Phone size={21}/></IconButton>            
             <IconButton title="Search in conversation" onClick={()=>setShowChatSearch(v=>!v)}><Search size={20}/></IconButton>
 
             <IconButton title="More options" onClick={()=>setShowMenu(v=>!v)}><MoreVertical size={21}/></IconButton>
@@ -619,13 +619,47 @@ function App() {
 
         {showChatSearch && <div className="inline-chat-search"><Search size={16}/><input autoFocus placeholder="Search messages"/><IconButton title="Close search" onClick={()=>setShowChatSearch(false)}><X size={17}/></IconButton></div>}
 
-        <div className={`messages-scroll ${active.type==='assistant' && active.messages.length===0 ? 'assistant-empty' : ''}`} key={activeId}>
+        <div className={`messages-scroll ${active.type === 'assistant' && active.messages.length === 0 ? 'assistant-empty' : ''}`} key={activeId}>
 
-          {active.type!=='assistant' && <><div className="encryption-notice"><span className="lock-mini">▣</span> This is a demo conversation. Messages are stored locally in this prototype. </div><div className="today-pill">TODAY</div></>}
+          {active.type !== 'assistant' && <>
+            <div className="encryption-notice">
+              <span className="lock-mini">▣</span>
+              This is a demo conversation. Messages are stored locally in this prototype.
+            </div>
+            <div className="today-pill">TODAY</div>
+          </>}
 
-          {active.messages.map((m,i)=><Message key={`${activeId}-${i}`} message={m}/>)}
+          {/* MUSE WELCOME SCREEN */}
+          {active.type === 'assistant' && active.messages.length === 0 && (
+            <div className="muse-welcome">
+              <img src="/assets/muse-avatar.png" alt="Muse" />
+              <span className="muse-eyebrow">YOUR BUSINESS, IN SYNC</span>
+              <h2>Hey, I'm Muse.</h2>
+              <p>Your operations assistant. Let's get the busywork out of the way.</p>
 
-          {active.type === 'assistant' && isAssistantThinking && (<div className="message-line"><div className="bubble incoming-bubble">MuseOps is thinking...</div></div>)}
+              <div className="muse-suggestions">
+                <button onClick={() => setDraft("Help me check a supplier invoice against its purchase order.")}>
+                  <strong>Check an invoice</strong>
+                  <span>Find mismatches before approval</span>
+                </button>
+
+                <button onClick={() => setDraft("What can you help me with in my business operations?")}>
+                  <strong>Explore MuseOps</strong>
+                  <span>See how I can help</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {active.messages.map((m, i) => (
+            <Message key={`${activeId}-${i}`} message={m} />
+          ))}
+
+          {active.type === 'assistant' && isAssistantThinking && (
+            <div className="message-line">
+              <div className="bubble incoming-bubble">MuseOps is thinking...</div>
+            </div>
+          )}
 
         </div>
 

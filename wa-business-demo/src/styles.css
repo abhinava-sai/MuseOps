@@ -390,3 +390,107 @@
   color: #e9edef;
   font-size: 11px;
 }
+
+
+/* MuseOps visual refresh */
+.avatar.muse-avatar {
+  background: #f4e9d5;
+  border: 2px solid rgba(255,255,255,.12);
+  overflow: hidden;
+}
+.avatar.muse-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.avatar.muse-avatar.header-avatar {
+  width: 44px;
+  height: 44px;
+}
+.muse-rail-logo {
+  overflow: hidden;
+  background: #f4e9d5 !important;
+  border: 1px solid rgba(255,255,255,.2);
+}
+.muse-rail-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.messages-scroll.assistant-empty {
+  justify-content: center;
+}
+.muse-welcome {
+  width: min(100%, 640px);
+  margin: auto;
+  padding: 28px 20px;
+  text-align: center;
+  align-self: center;
+}
+.muse-welcome > img {
+  width: 108px;
+  height: 108px;
+  object-fit: contain;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.2));
+}
+.muse-eyebrow {
+  display: block;
+  color: #65d6b2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.muse-welcome h2 {
+  margin: 0 0 10px;
+  color: #f5f7f8;
+  font-size: clamp(27px, 3vw, 38px);
+  letter-spacing: -1.2px;
+}
+.muse-welcome > p {
+  color: #aebac1;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 auto 26px;
+  max-width: 390px;
+}
+.muse-suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  text-align: left;
+}
+.muse-suggestions button {
+  padding: 17px;
+  border: 1px solid #344b4b;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #1c302f, #172329);
+  color: #e9edef;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .2s, transform .2s;
+}
+.muse-suggestions button:hover {
+  border-color: #00a884;
+  transform: translateY(-2px);
+}
+.muse-suggestions strong,
+.muse-suggestions span {
+  display: block;
+}
+.muse-suggestions strong {
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+.muse-suggestions span {
+  color: #aebac1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+@media (max-width: 600px) {
+  .muse-suggestions {
+    grid-template-columns: 1fr;
+  }
+}
